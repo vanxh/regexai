@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 import { Chip } from "@/components/ui/Chip";
 import { Button } from "@/components/ui/Button";
+import { Copy } from "lucide-react";
 
 const Home: NextPage = () => {
   const apiClient = api.useContext().client;
@@ -20,8 +21,11 @@ const Home: NextPage = () => {
   const [exampleInvalidInputValue, setExampleInvalidInputValue] =
     useState<string>("");
 
+  const [response, setResponse] = useState<string>("");
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setResponse("");
     setLoading(true);
 
     const response = await apiClient.ai.createRegEx.mutate({
@@ -29,7 +33,11 @@ const Home: NextPage = () => {
       exampleValid,
       exampleInvalid,
     });
-    console.log(response);
+    if (response) {
+      setResponse(response);
+    } else {
+      setResponse("Something went wrong");
+    }
 
     setLoading(false);
   };
@@ -125,6 +133,25 @@ const Home: NextPage = () => {
         <Button disabled={loading || regExDescription.length === 0}>
           {loading ? "Loading..." : "Get RegEx"}
         </Button>
+
+        {response && (
+          <div className="flex flex-col gap-y-2">
+            <Label htmlFor="response">
+              Here&apos;s your RegEx, copy it and paste it wherever you need it
+            </Label>
+            <div className="relative flex flex-row items-center gap-x-2 overflow-hidden rounded-md border border-transparent bg-white bg-opacity-30 px-2 py-2 backdrop-blur-md">
+              <Input id="response" value={response} disabled />
+              <Copy
+                onClick={() => {
+                  navigator.clipboard?.writeText(response).catch((e) => {
+                    console.error(e);
+                  });
+                }}
+                className="cursor-pointer text-white transition-all ease-in-out active:scale-95"
+              />
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
