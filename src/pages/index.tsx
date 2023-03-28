@@ -35,7 +35,9 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center gap-y-8">
+      <h1 className="text-5xl font-bold text-white md:text-7xl">RegEx AI</h1>
+
       <form
         onSubmit={
           onSubmit as unknown as (e: React.FormEvent<HTMLFormElement>) => void
