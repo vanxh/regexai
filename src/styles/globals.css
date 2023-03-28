@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: linear-gradient(135deg, #72edf2 10%, #7156e9 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cpath fill='%237178E9' fill-opacity='0.2' d='M5 5h5v5H5V5zm5 5h5v5H10v-5zm5 5h5v5H15v-5zm5 5h5v5H20v-5zm-10 0h5v5H10v-5zm10 0h5v5H20v-5zm-15 0h5v5H5v-5zm0 10h5v5H5v-5zm5 5h5v5H10v-5zm20-20h5v5H25v-5zm5 0h5v5H30v-5zm0 10h5v5H30v-5zm-20 0h5v5H10v-5zm10 5h5v5H20v-5z'/%3E %3C/svg%3E");
+  background-size: cover;
+  background-attachment: fixed;
+}
